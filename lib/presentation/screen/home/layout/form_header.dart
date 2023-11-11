@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wedding_project/core/constant/app_color.dart';
 
 class FormHeader extends StatelessWidget {
   final String title;
@@ -17,7 +18,7 @@ class FormHeader extends StatelessWidget {
           color: Color.fromARGB(255, 255, 255, 255),
           border: Border(
             bottom: BorderSide(
-              color: Color.fromARGB(255, 194, 183, 183),
+              color: AppColor.wedding,
             ),
           ),
           // borderRadius: BorderRadius.only(

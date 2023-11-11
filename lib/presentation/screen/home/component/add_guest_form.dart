@@ -56,6 +56,9 @@ class _AddGuestFormState extends State<AddGuestForm> {
     fnCurrency = FocusNode();
     fnSide = FocusNode();
 
+    tecPaymentType.text = 'ABA';
+    tecCurrency.text = 'Dollar';
+
     if (widget.formEdit == true) {
       tecName.text = customerController.selectedCustomer!.name;
       tecPaymentType.text = customerController.selectedCustomer!.paymentType;

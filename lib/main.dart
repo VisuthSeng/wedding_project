@@ -10,10 +10,10 @@ void main() async {
 
   await Firebase.initializeApp(
     options: const FirebaseOptions(
-      apiKey: "AIzaSyD01UO8PJQslFaAmqcmOtDYQt5RQpCq06M",
-      appId: "1:708748129664:web:60646dbe485cea83697d65",
-      messagingSenderId: "708748129664",
-      projectId: "wedding-thika",
+      apiKey: "AIzaSyAHVlsKi3dotXuUI-wS80g0lg6slKqMK44",
+      appId: "1:1047235649636:web:160c87de6b932530e53f71",
+      messagingSenderId: "1047235649636",
+      projectId: "wedding-thika-ba6f5",
     ),
   );
 

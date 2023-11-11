@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:wedding_project/core/constant/app_color.dart';
 import 'package:wedding_project/presentation/screen/home/component/add_guest_form.dart';
 import 'package:wedding_project/presentation/widget/button_text.dart';
+
+import '../../controller/customer_controller.dart';
+import 'component/customer_list.dart';
 
 class HomeScreen extends StatefulWidget {
   final bool? formEdit;
@@ -16,6 +20,11 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
+  final CustomerController customerController = Get.find();
+
+  void onDelete(String id) {
+    customerController.deleteData(id);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   width: 10,
                                 ),
                                 SizedBox(
-                                  width: 150,
+                                  width: 200,
                                   child: Center(
                                     child: Text(
                                       'Name',
@@ -122,7 +131,24 @@ class _HomeScreenState extends State<HomeScreen> {
                                   width: 150,
                                   child: Center(
                                     child: Text(
-                                      'Payment ',
+                                      'Payment',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyLarge!
+                                          .copyWith(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                SizedBox(
+                                  width: 150,
+                                  child: Center(
+                                    child: Text(
+                                      'Currency',
                                       style: Theme.of(context)
                                           .textTheme
                                           .bodyLarge!
@@ -150,7 +176,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                 ),
                                 const SizedBox(
-                                  width: 50,
+                                  width: 20,
                                 ),
                                 ButtonText(
                                   title: 'Add Guest',
@@ -168,39 +194,79 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                         ),
-                        // SizedBox(
-                        //   width: constraints.maxWidth - 10,
-                        //   height: constraints.maxHeight - 60 - 42,
-                        //   child: SingleChildScrollView(
-                        //     child: Column(
-                        //       children: List.generate(
-                        //         categoryController.listOfCategory.length,
-                        //         (index) => CategoryList(
-                        //           categoryModel: categoryController
-                        //               .listOfCategory[index],
-                        //           index: index,
-                        //           onSelect: () =>
-                        //               categoryController.selectCategory(
-                        //             categoryController.listOfCategory[index],
-                        //           ),
-                        //           onEdit: () {
-                        //             categoryController.selectCategory(
-                        //                 categoryController
-                        //                     .listOfCategory[index]);
-                        //             Get.to(
-                        //               () => const CategoryForm(
-                        //                 formEdit: true,
-                        //               ),
-                        //             );
-                        //           },
-                        //           onDelete: () => onDelete(
-                        //             categoryController.listOfCategory[index],
-                        //           ),
-                        //         ),
-                        //       ),
-                        //     ),
-                        //   ),
-                        // ),
+                        SizedBox(
+                            width: 1920,
+                            height: constraints.maxHeight - 20 - 82,
+                            child: SingleChildScrollView(
+                              child: Obx(
+                                () => Column(
+                                  children: List.generate(
+                                    customerController.listOfCustomer.length,
+                                    (index) => CustomerList(
+                                      customerModel: customerController
+                                          .listOfCustomer[index],
+                                      index: index + 1,
+                                      onSelect: () =>
+                                          customerController.selectCustomer(
+                                        customerController
+                                            .listOfCustomer[index],
+                                      ),
+                                      onEdit: () {
+                                        customerController.selectCustomer(
+                                            customerController
+                                                .listOfCustomer[index]);
+                                        // Get.to(
+                                        //   () => const CustomerForm(
+                                        //     formEdit: true,
+                                        //   ),
+                                        // );
+                                      },
+                                      onDelete: () {
+                                        customerController.selectCustomer(
+                                            customerController
+                                                .listOfCustomer[index]);
+                                        onDelete(customerController
+                                            .selectedCustomer!.id);
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            )
+                            // SizedBox(
+                            //   width: constraints.maxWidth - 10,
+                            //   height: constraints.maxHeight - 60 - 42,
+                            //   child: SingleChildScrollView(
+                            //     child: Column(
+                            //       children: List.generate(
+                            //         categoryController.listOfCategory.length,
+                            //         (index) => CategoryList(
+                            //           categoryModel: categoryController
+                            //               .listOfCategory[index],
+                            //           index: index,
+                            //           onSelect: () =>
+                            //               categoryController.selectCategory(
+                            //             categoryController.listOfCategory[index],
+                            //           ),
+                            //           onEdit: () {
+                            //             categoryController.selectCategory(
+                            //                 categoryController
+                            //                     .listOfCategory[index]);
+                            //             Get.to(
+                            //               () => const CategoryForm(
+                            //                 formEdit: true,
+                            //               ),
+                            //             );
+                            //           },
+                            //           onDelete: () => onDelete(
+                            //             categoryController.listOfCategory[index],
+                            //           ),
+                            //         ),
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
+                            ),
                       ],
                     ),
                   ),
