@@ -144,7 +144,15 @@ class _CustomerListState extends State<CustomerList> {
                 },
               ),
               const SizedBox(
-                width: 50,
+                width: 20,
+              ),
+              ButtonIcon(
+                icon: Icons.edit,
+                backgroundButton: Colors.white,
+                iconColor: Colors.purple[200],
+                onPress: () {
+                  widget.onEdit();
+                },
               ),
             ],
           ),

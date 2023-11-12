@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ButtonText extends StatelessWidget {
+  final int? record;
   final String title;
   final String tooltip;
   final Function onPress;
@@ -16,6 +17,7 @@ class ButtonText extends StatelessWidget {
     this.width,
     this.height,
     this.backgroundButton,
+    this.record,
   });
 
   @override

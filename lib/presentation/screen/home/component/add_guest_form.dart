@@ -323,14 +323,33 @@ class _AddGuestFormState extends State<AddGuestForm> {
                     iconColor: Colors.white,
                     iconSize: 24,
                     onPress: () {
-                      saveData();
-                      Navigator.pop(context);
+                      if (widget.formEdit == false) {
+                        saveData();
+                        Navigator.pop(context);
+                      } else {
+                        updateData();
+                        Navigator.pop(context);
+                      }
                     }),
                 ButtonText(
                   backgroundButton: AppColor.wedding,
                   title: 'Save & Next',
                   tooltip: '',
-                  onPress: () {},
+                  onPress: () {
+                    if (widget.formEdit == false) {
+                      saveData();
+                      Navigator.pop(context);
+                    } else {
+                      updateData();
+                      Navigator.pop(context);
+                    }
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return const AddGuestForm();
+                      },
+                    );
+                  },
                 ),
               ],
             ),

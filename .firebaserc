@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "wedding-thika"
-  }
+    "default": "wedding-thika-ba6f5",
+    "staging": "wedding-thika-ba6f5"
+  },
+  "targets": {},
+  "etags": {}
 }

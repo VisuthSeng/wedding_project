@@ -1,9 +1,7 @@
 import 'package:get/get.dart';
-import 'package:wedding_project/core/util/Uid.dart';
-
-import '../../data/model/customer_model.dart';
-import '../../data/repository/customer_repository.dart';
-import '../widget/alert_box.dart';
+import 'package:wedding_project/data/model/customer_model.dart';
+import 'package:wedding_project/data/repository/customer_repository.dart';
+import 'package:wedding_project/presentation/widget/alert_box.dart';
 
 class CustomerController extends GetxController {
   final CustomerRepository customerRepository; // Inject the repository
@@ -12,13 +10,13 @@ class CustomerController extends GetxController {
 
   var listOfCustomer = RxList<CustomerModel>();
 
-  var blankCustomer = CustomerModel(
-    id: UId.getId(),
+  var blankCategory = CustomerModel(
+    id: '',
     name: '',
     paymentType: '',
     payment: 0,
-    side: '',
     currency: '',
+    side: '',
   );
   late CustomerModel? selectedCustomer;
 
@@ -29,13 +27,18 @@ class CustomerController extends GetxController {
 
   @override
   void onInit() async {
-    selectedCustomer = blankCustomer;
-    _getStreamListOfCustomer();
+    selectedCustomer = blankCategory;
+    getStreamListOfCustomer();
     super.onInit();
   }
 
+  void selectCustomer(CustomerModel? model) {
+    selectedCustomer = model;
+    listOfCustomer.refresh();
+  }
+
   void resetData() {
-    selectedCustomer = blankCustomer;
+    selectedCustomer = blankCategory;
     listOfCustomer.assignAll(listAllCustomer);
   }
 
@@ -52,7 +55,7 @@ class CustomerController extends GetxController {
     isLoading.value = false;
   }
 
-  void _getStreamListOfCustomer() {
+  void getStreamListOfCustomer() {
     customerRepository.getStreamOfCustomer().listen(
       (event) {
         isLoading.value = true;
@@ -67,11 +70,6 @@ class CustomerController extends GetxController {
         AlertBox.warning(message: 'Warning');
       },
     );
-  }
-
-  void selectCustomer(CustomerModel? model) {
-    selectedCustomer = model;
-    listOfCustomer.refresh();
   }
 
   Future<bool> saveData(CustomerModel model) async {
@@ -101,7 +99,7 @@ class CustomerController extends GetxController {
     var bCheck = false;
     try {
       await customerRepository.deleteCustomer(recordId);
-      selectedCustomer = blankCustomer;
+      selectedCustomer = blankCategory;
       bCheck = true;
     } catch (error) {
       AlertBox.warning(message: 'Warning');

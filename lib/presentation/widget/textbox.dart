@@ -53,7 +53,7 @@ class _TextBoxState extends State<TextBox> {
 
   void _clearTextOnTap() {
     if (widget.focusNode.hasFocus) {
-      widget.controller.clear();
+      // widget.controller.clear();
     }
   }
 
