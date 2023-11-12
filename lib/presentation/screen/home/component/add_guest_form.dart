@@ -19,8 +19,8 @@ class AddGuestForm extends StatefulWidget {
 }
 
 class _AddGuestFormState extends State<AddGuestForm> {
-  String selectedPaymentType = 'ABA';
-  String selectedCurrency = '\$';
+  String selectedPaymentType = '';
+  String selectedCurrency = '';
   String selectedSide = '';
 
   final CustomerController customerController = Get.find();
@@ -56,15 +56,57 @@ class _AddGuestFormState extends State<AddGuestForm> {
     fnCurrency = FocusNode();
     fnSide = FocusNode();
 
+    selectedPaymentType = 'ABA';
     tecPaymentType.text = 'ABA';
+    selectedCurrency = '\$';
     tecCurrency.text = 'Dollar';
 
+    selectedSide = 'Groom';
+    tecSide.text = 'Groom';
     if (widget.formEdit == true) {
       tecName.text = customerController.selectedCustomer!.name;
       tecPaymentType.text = customerController.selectedCustomer!.paymentType;
+      if (tecPaymentType.text == 'Cash') {
+        setState(() {
+          selectedPaymentType = 'Cash';
+        });
+      } else if (tecPaymentType.text == 'ABA') {
+        setState(() {
+          selectedPaymentType = 'ABA';
+        });
+      } else if (tecPaymentType.text == 'ACLEDA') {
+        setState(() {
+          selectedPaymentType = 'ACLEDA';
+        });
+      } else if (tecPaymentType.text == 'Wing') {
+        setState(() {
+          selectedPaymentType = 'Wing';
+        });
+      }
       tecPayment.text = customerController.selectedCustomer!.payment.toString();
+
       tecCurrency.text = customerController.selectedCustomer!.currency;
+      if (tecCurrency.text == 'Dollar') {
+        setState(() {
+          selectedCurrency = '\$';
+        });
+      } else if (tecCurrency.text == 'Riels') {
+        setState(() {
+          selectedCurrency = 'Riels';
+        });
+      }
+
       tecSide.text = customerController.selectedCustomer!.side;
+
+      if (tecSide.text == 'Groom') {
+        setState(() {
+          selectedSide = 'Groom';
+        });
+      } else if (tecSide.text == 'Bride') {
+        setState(() {
+          selectedSide = 'Bride';
+        });
+      }
     }
 
     super.initState();
@@ -188,7 +230,7 @@ class _AddGuestFormState extends State<AddGuestForm> {
                       onPress: () {
                         setState(() {
                           selectedPaymentType = 'ACLEDA';
-                          tecPaymentType.text = 'ACELEDA';
+                          tecPaymentType.text = 'ACLEDA';
                         });
                       }),
                 ),
