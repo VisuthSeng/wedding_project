@@ -22,6 +22,8 @@ class CustomerController extends GetxController {
 
   var isLoading = false.obs;
 
+  double totalPayments = 0.0;
+
   CustomerController(
       {required this.customerRepository}); // Inject the repository
 
@@ -40,6 +42,28 @@ class CustomerController extends GetxController {
   void resetData() {
     selectedCustomer = blankCategory;
     listOfCustomer.assignAll(listAllCustomer);
+  }
+
+  void assignRielsCustomersToList() {
+    List<CustomerModel> rielsCustomers = listAllCustomer
+        .where((customer) => customer.currency == 'Riels')
+        .toList();
+    listOfCustomer.assignAll(rielsCustomers);
+  }
+
+  void assignDollarCustomersToList() {
+    List<CustomerModel> rielsCustomers = listAllCustomer
+        .where((customer) => customer.currency == 'Dollar')
+        .toList();
+    listOfCustomer.assignAll(rielsCustomers);
+  }
+
+  double calculateTotalPayments() {
+    totalPayments = 0;
+    for (CustomerModel customer in listOfCustomer) {
+      totalPayments += customer.payment;
+    }
+    return totalPayments;
   }
 
   void searchData(String strSearch) {
@@ -97,13 +121,13 @@ class CustomerController extends GetxController {
 
   Future<bool> deleteData(String recordId) async {
     var bCheck = false;
-    try {
-      await customerRepository.deleteCustomer(recordId);
-      selectedCustomer = blankCategory;
-      bCheck = true;
-    } catch (error) {
-      AlertBox.warning(message: 'Warning');
-    }
+    // try {
+    //   await customerRepository.deleteCustomer(recordId);
+    //   selectedCustomer = blankCategory;
+    //   bCheck = true;
+    // } catch (error) {
+    //   AlertBox.warning(message: 'Warning');
+    // }
     return bCheck;
   }
 }

@@ -204,9 +204,23 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ),
                                     ),
                                     const SizedBox(
+                                      width: 15,
+                                    ),
+                                    ButtonText(
+                                      width: 50,
+                                      title: 'All',
+                                      tooltip: '',
+                                      onPress: () {
+                                        customerController.listOfCustomer
+                                            .assignAll(customerController
+                                                .listAllCustomer);
+                                      },
+                                    ),
+                                    const SizedBox(
                                       width: 20,
                                     ),
                                     ButtonText(
+                                      width: 100,
                                       title: 'Add Guest',
                                       tooltip: '',
                                       onPress: () {
@@ -221,8 +235,58 @@ class _HomeScreenState extends State<HomeScreen> {
                                     const SizedBox(
                                       width: 20,
                                     ),
+                                    ButtonText(
+                                      width: 100,
+                                      title: 'Riels Only',
+                                      tooltip: '',
+                                      onPress: () {
+                                        customerController
+                                            .assignRielsCustomersToList();
+                                      },
+                                    ),
+                                    const SizedBox(
+                                      width: 20,
+                                    ),
+                                    ButtonText(
+                                      width: 100,
+                                      title: 'Dollar Only',
+                                      tooltip: '',
+                                      onPress: () {
+                                        customerController
+                                            .assignDollarCustomersToList();
+                                      },
+                                    ),
+                                    const SizedBox(
+                                      width: 20,
+                                    ),
+                                    ButtonText(
+                                      width: 100,
+                                      title: 'Calculate Total',
+                                      tooltip: '',
+                                      onPress: () {
+                                        setState(() {
+                                          customerController
+                                              .calculateTotalPayments();
+                                        });
+                                      },
+                                    ),
+                                    const SizedBox(
+                                      width: 20,
+                                    ),
+                                    ButtonText(
+                                      width: 100,
+                                      backgroundButton: Colors.white,
+                                      title:
+                                          'Total = ${customerController.totalPayments}',
+                                      tooltip: '',
+                                      onPress: () {},
+                                    ),
+                                    const SizedBox(
+                                      width: 20,
+                                    ),
                                     Obx(
                                       () => ButtonText(
+                                        width: 100,
                                         record: customerController
                                             .listOfCustomer.length,
                                         backgroundButton: Colors.white,
